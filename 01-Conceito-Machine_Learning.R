@@ -35,7 +35,7 @@ getwd()
 # - Objetivo é aprender o que é e o que não é Machine Learning.
 
 
-# O que é Machine Learning ?
+## O que é Machine Learning ?
 
 #  -> Machine Learning é um método de análise de dados que automatiza a construção de modelos analíticos usando algoritmos que imperativamente
 #     aprendem a partir dos dados, portando Machine Learning permite que computadores encontrem insights ocultos sem que sejam programados para isso.
@@ -43,7 +43,7 @@ getwd()
 #  -> Os algoritmos processam os dados de maneira específicas e criam previsões baseados em padrões detectados nos dados.
 
 
-# E como as máquinas aprendem ?
+## E como as máquinas aprendem ?
 
 #  -> As máquinas aprendem através de um processo de treinamento supervisionado em que algoritmos de Machine Learning aprendem a partir de dados, 
 #     ajustando seus parâmetros internos para fazer previsões ou tomar decisões com base em padrões detectados nos dados de treinamento. 
@@ -63,8 +63,10 @@ getwd()
 
 
 
-## Machine Learning x Estatística
+# - Machine Learning se baseia em alguns importantes conceitos de:
 
-
+#  -> Matemática            (Manipulação de Matrizes)
+#  -> Estatística           (Teoria da Probabilidade e Inferência Estatística)
+#  -> Ciência da Computação (Programação / Armazenamento e Processamento de Dados)
 
 
