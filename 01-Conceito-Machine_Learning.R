@@ -1,4 +1,4 @@
-# Lista de Exercícios
+# Conceito Machine Learning
 
 # Configurando o diretório de trabalho
 setwd("C:/Users/Julia/Desktop/CienciaDeDados/1.Big-Data-Analytics-com-R-e-Microsoft-Azure-Machine-Learning/11.Machine-Learning-em-Linguagem-R")
@@ -68,5 +68,63 @@ getwd()
 #  -> Matemática            (Manipulação de Matrizes)
 #  -> Estatística           (Teoria da Probabilidade e Inferência Estatística)
 #  -> Ciência da Computação (Programação / Armazenamento e Processamento de Dados)
+
+
+## O que são Algoritmos ?
+
+# - Algoritmos são procedimentos (lista de ações) ou fórmulas usados para resolver problemas.
+# - Machine Learning usa algoritmos para analisar grandes conjuntos de dados!
+
+
+
+## O que são e quais são Os Machine Learning Frameworks
+
+# - Para criar modelos de Machine Learning você tem duas opções:
+
+#  -> Desenvolver os algoritmos a partir do zero
+#  -> Utilizar Frameworks prontos
+
+# Decidir se desenvolve do zero ou utiliza um Framework dependerá do problema de negócio.
+
+
+# - Um framework é um conjunto de softwares que produzem um resultado específico. Um framework nos permite focar mais no problema de negócio e 
+#   menos na parte de codificação.
+# - Frameworks de Machine Learning permitem que você trabalhe em um problema, sem ter que saber muito sobre programação.
+# - O framework cuida da gestão de infraestrutura, enquanto você pode focar mais na parte inteligente da sua aplicação.
+
+
+# E por que usar Machine Learning frameworks ?
+
+# - Para acelarmos o tempo de desenvolvimento de modelos preditivos.
+
+
+
+## Principais Machine Learning Frameworks
+
+#  Pacote caret       - oferece uma série de algoritmos prontos que você faz a chamada através de funções.
+# (Linguagem R)         (preparamos os dados, organizamos os dados para o treinamento, fazemos a chamada a função,
+#                       digo qual algoritmo utilizar, feito o treinamento, faz as previsões e entrega o resultado)
+
+# Microsoft Azure     - ferramenta onde basta soltar e arrastar. É mais plataforma do que Framework, mas ainda assim ele oferece
+# Machine Learning      alguns algoritmos prontos que podemos utilizar. Podemos também usar a linguagem R dentro do Azure.
+#                       A principal vantagem é ser quase tudo visual, onde basta arrastar e soltar os módulos o que acelera o processo.
+
+#   Scikit-Learn      - É uma biblioteca de código aberto em Python que oferece uma ampla variedade de algoritmos de Machine Learning para 
+# (Linguagem Python)    tarefas de classificação, regressão, clusterização, seleção de características e muito mais. É uma ótima escolha para
+#                       iniciantes e profissionais experientes.
+
+# Apache Spark MLlib  - Integrado com o Apache Spark, o MLlib é uma biblioteca de Machine Learning distribuída que permite a execução de tarefas
+#                       de Machine Learning em grandes conjuntos de dados distribuídos.
+
+#   TensorFlow        - Desenvolvido pelo Google, o TensorFlow é um framework de Machine Learning de código aberto que se concentra principalmente
+#                       em redes neurais e aprendizado profundo (Deep Learning). Ele oferece uma grande flexibilidade e é amplamente utilizado em
+#                       pesquisa e produção. Recomendável quando já se tem algum conhecimento em Machine Learning em linguagem R ou Python.
+
+#    Keras            - Keras é uma API de alto nível que pode ser executada em cima de outros frameworks, como TensorFlow e Theano. É conhecido 
+#                       por ser fácil de usar e é uma escolha popular para prototipagem rápida de modelos de Deep Learning.
+
+#   Caffe             - É um framework de Deep Learning especializado em visão computacional, amplamente utilizado em tarefas de reconhecimento
+#                       de imagem.
+
 
 
