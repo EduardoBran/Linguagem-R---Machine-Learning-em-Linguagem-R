@@ -128,3 +128,7 @@ getwd()
 
 
 
+# - Machine Learning é a aplicação de conceitos matemáticos e estatísticos que tentam reproduzir nos computadores a forma como ocorre a
+#   aprendizagem humana.
+
+
