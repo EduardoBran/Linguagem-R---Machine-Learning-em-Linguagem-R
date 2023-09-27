@@ -123,7 +123,7 @@ getwd()
 #    Keras            - Keras é uma API de alto nível que pode ser executada em cima de outros frameworks, como TensorFlow e Theano. É conhecido 
 #                       por ser fácil de usar e é uma escolha popular para prototipagem rápida de modelos de Deep Learning.
 
-#   Caffe             - É um framework de Deep Learning especializado em visão computacional, amplamente utilizado em tarefas de reconhecimento
+#    Caffe            - É um framework de Deep Learning especializado em visão computacional, amplamente utilizado em tarefas de reconhecimento
 #                       de imagem.
 
 
