@@ -13,9 +13,11 @@ getwd()
 # - E para poder generalizar a função que melhor resolve o problema, os algoritmos de Machine Learning se baseiam em 3 componentes:
 
 #  -> Representação: é o conjunto de modelos que o algoritmo pode aprender
+
 #  -> Avaliação    : um algoritmo pode criar mais de um modelo, mas ele nao sabe qual modelo é bom ou ruim, para isso o algoritmo de Machine Learning
 #                    faz a avaliação dos modelos gerados por ele mesmo e atribui pontos. Cada modelo recebe uma pontuação o que ajude a escolher o
 #                    melhor modelo.
+
 #  -> Otimização   : em algum momento produz um conjunto de modelos que produzem o resultado correto. É um algoritmo dentro de outro algoritmo onde
 #                    busca a otimização.
 
