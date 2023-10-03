@@ -209,6 +209,32 @@ getwd()
 
 
 
+#  -> Algoritmos Ensemble: (são modelos compostos por múltiplos modelos mais fracos que são independemente treinamos e cujas as previsões são
+#                          combinadas de alguma forma para fazer a previsão geral)
+
+# - Boosting
+# - Bootstrapped Aggregation (Bagging)
+# - AdaBoost
+# - Stacked Generalization (blending)
+# - Gradient Boosting Machines (GBM)
+# - Gradient Boosted Regression Trees (GBRT)
+# - Random Forest (um dos melhores)
+
+
+
+#  -> Outros algoritmos
+
+# - Support Vector Machines            (Um algoritmo de aprendizado supervisionado que é usado para tarefas de classificação e regressão.)
+# - Computer Vision (CV)               (Uma área de Machine Learning que se concentra na interpretação e análise de imagens e vídeos.)  
+# - Natural Language Processing (NLP)  (Uma área que se concentra no processamento de linguagem natural e no entendimento de texto humano.)
+# - Recommender Systems                (Algoritmos usados para fazer recomendações personalizadas com base no histórico de interações do usuário.)
+# - Graphical Models                   (Modelos gráficos probabilísticos usados para representar e resolver problemas de inferência probabilística,
+#                                      incluindo Redes Bayesianas e Markov Random Fields.)
+
+
+
+
+
 
 
 
