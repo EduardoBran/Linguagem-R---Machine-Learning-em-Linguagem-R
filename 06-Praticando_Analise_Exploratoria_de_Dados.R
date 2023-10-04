@@ -115,6 +115,22 @@ plot(x = carros$kilometragem, y = carros$preco,
 
 
 
+####### Medidas de Dispersão ####### (** explicação abaixo)
+
+var(carros$preco)
+sd(carros$preco)
+
+var(carros$kilometragem)
+sd(carros$kilometragem)
+
+# - Ao interpretar a variância, números maiores indicam que os dados estão espalhados mais amplamente em torno da média.
+#   O desvio padrão indica, em média, a quantidade de cada valor diferente da média.
+
+
+
+
+
+
 
 
 
