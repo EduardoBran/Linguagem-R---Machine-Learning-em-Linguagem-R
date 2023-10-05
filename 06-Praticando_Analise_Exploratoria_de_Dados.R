@@ -10,7 +10,6 @@ getwd()
 ###############  Análise Exploratória de Dados ###############
 
 
-
 # - Antes de construirmos um modelo de regressão e um modelo de classificação precisamos antes falar sobre a análise exploratória de dados.
 
 # - Independemente do tipo de modelo de Machine Learning que iremos construir, a análise explorátoria é uma etapa fundamental.
@@ -29,11 +28,14 @@ getwd()
 #   (utilizaremos o dataset carros-usados)
 
 
+install.packages("gmodels")
 
 # Carregando pacotes
 library(dplyr)
 library('ggplot2')
 library(readr)
+library(gmodels)   # pacote de gráficos e funções estatísticas que oferece funcionalidades adicionais para criar tabelas de contingência e realizar
+#                    análises estatísticas.
 
 
 # Carregando o dataset
@@ -132,6 +134,99 @@ sd(carros$kilometragem)
 
 
 
+####### Análise Exploratória de Dados Para Variáveis CATEGÓRIAS #######
+
+
+
+# Vamos criar tabelas de contingência que representam uma única variável categórica 
+# (e assim lista as categorias das variáveis nominais)
+
+str(carros)               # percebemos que a variável cor / modelo é "chr" e por isso uma variável categórica
+
+table(carros$cor)         # mostra a quantidade de cada carro de acordo com a cor
+table(carros$modelo)      # mostra a quantidade de cada carro de acordo com o modelo
+
+
+# Calculando a proporção de cada categoria
+
+model_table <- table(carros$modelo)
+model_table
+
+prop.table(model_table)              
+
+model_table <- prop.table(model_table) * 100  # arredonda o valor
+model_table <- round(model_table, digits = 1) # arredonda o valor
+
+model_table                                   # 52% dos carros modelo SE, 15.3% modelo SEL e 32.7% modelo SES
+
+
+
+# Cria uma nova variável indicando cores conservadoras, ou seja que as pessoas compram com mais frequência
+# (cria uma nova variável booleana com "TRUE" para carros com as cores conservadoras e "FALSE" para outras cores)
+
+head(carros)
+
+carros$conserv <- carros$cor %in% c("Preto", "Cinza", "Prata", "Branco")
+
+View(carros)
+head(carros)
+
+table(carros$conserv)                                      # 51 FALSE  99 TRUE
+round(prop.table(table(carros$conserv)) * 100, digits = 1) # arredonda o valor
+
+
+
+# Outra forma de criar uma tabela de contingência (explicação abaixo)
+# (vamos verificar o relacionamento entre 2 variáveis categóricas através da criação de uma CrossTable)
+# (as tabelas de contingência fornecem uma maneira de exibir as frequências e frequências relativas de observaçoes que são classificados de
+#  acordo com duas variáveis categórias. Os elementos de uma categoria são exibidos através das colunas, enquanto os elementos de outra
+#  categoria são exibidas sobre as linhas)
+
+?CrossTable
+
+CrossTable(x = carros$modelo, y = carros$conserv)
+CrossTable(x = carros$modelo, y = carros$cor)
+CrossTable(x = carros$modelo, y = carros$transmissao)
+
+head(carros)
+
+
+
+
+# Teste do Qui-quadrado
+
+# - Simbolizado por X2 é  um teste de hipóteses usado para determinar se existe uma associação significativa entre duas variáveis
+#   categóricas. 
+# - É um teste não paramétrico, ou seja, não depende dos parâmetros populacionais como média e variância.
+# - O princípio básico deste método é comparar proporções, isto é, as possíveis divergências entre as frequências observadas e esperadas
+#   para um certo evento. Evidentemente, pode-se dizer que dois grupos se comportam de forma semelhante se as diferenças entre as
+#   frequências observadas e as esperadas em cada categoria forem muito pequenas, próximas a zero.
+
+# - Ou seja, Se a probabilidade é muito baixa, ele fornece fortes evidências de que as duas variáveis estão associadas.
+
+CrossTable(x = carros$modelo, y = carros$conserv, chisq = TRUE)   # calcula qui-quadrado direto com "chisq = TRUE"
+chisq.test(x = carros$modelo, y = carros$conserv)                 # calcula valor de qui
+
+
+# Trabalhamos com 2 hipóteses:
+
+# -> Hipótese nula: As frequências observadas não são diferentes das frequências esperadas. 
+#                   Não existe diferença entre as frequências (contagens) dos grupos.
+#                   Portanto, não há associação entre os grupos
+
+# -> Hipótese alternativa: As frequências observadas são diferentes das frequências esperadas, 
+#                          Existe diferença entre as frequências.
+#                          Portanto, há associação entre os grupos.
+
+
+# Neste caso, o valor do Chi = 0.15  
+# E graus de liberdade (df)  = 2
+
+# Portanto, não há associação entre os grupos
+# O valor alto do p-value confirma esta conclusão.
+
+
+
 
 
 
@@ -219,6 +314,52 @@ sd(carros$kilometragem)
 # Portanto, no seu conjunto de dados, tanto os preços quanto as quilometragens dos carros usados têm uma dispersão considerável em relação às
 # médias, conforme indicado pelos valores de variância e desvio padrão. Isso pode ser útil para entender a variabilidade dos dados e avaliar o
 # grau de consistência ou variação nos preços e quilometragens dos carros usados.
+
+
+
+
+#### Explicando Tabela de Contingência (CrossTable):
+
+# A tabela tem as seguintes seções:
+  
+#  -> Cell Contents (Conteúdo da Célula): Esta seção mostra os tipos de informações contidas nas células da tabela.
+
+# - "N" indica o número de observações em cada célula.
+# - "Chi-square contribution" (Contribuição qui-quadrado) é relevante para análises estatísticas mais avançadas, como o teste qui-quadrado.
+# - "N / Row Total" mostra a proporção do número de observações em relação ao total de observações na mesma linha.
+# - "N / Col Total" mostra a proporção do número de observações em relação ao total de observações na mesma coluna.
+# - "N / Table Total" mostra a proporção do número de observações em relação ao total geral de observações na tabela.
+
+# - Total Observations in Table (Total de Observações na Tabela): Esta seção indica o número total de observações na tabela, que é 150
+#   neste caso.
+
+# - Conteúdo da Tabela: A tabela principal mostra as frequências de combinações entre as categorias das variáveis "modelo" e "conserv."
+
+# - As colunas representam a variável "conserv" (com valores "FALSE" ou "TRUE").
+# - As linhas representam a variável "modelo" (com valores "SE," "SEL," e "SES").
+
+# Agora, interpretemos a tabela com base nos dados fornecidos (modelo x conserv):
+  
+# - Na célula (linha "SE," coluna "FALSE"), há 27 observações de carros que são do modelo "SE" e não têm cores conservadoras.
+# - A contribuição qui-quadrado para essa célula é 0.009, que é relevante para testes estatísticos.
+# - A proporção de observações "SE" não conservadoras em relação ao total de "SE" é de 0.346.
+# - A proporção de observações "SE" não conservadoras em relação ao total de "FALSE" é de 0.529.
+# - A proporção de observações "SE" não conservadoras em relação ao total geral da tabela é de 0.180.
+
+# Você pode aplicar a mesma lógica para as outras células da tabela para entender o relacionamento entre as duas variáveis.
+# Por exemplo, na célula (linha "SES," coluna "TRUE"), há 32 observações de carros do modelo "SES" que têm cores conservadoras.
+
+# Essa tabela de contingência é útil para visualizar como as variáveis categóricas estão relacionadas e pode ser usada em análises
+# estatísticas mais avançadas, como o teste qui-quadrado, para determinar se há associação significativa entre as duas variáveis.
+
+
+# Interpretando a relação de modelo x transmissao
+
+# - Na célula (linha "SE," coluna "AUTO"), há 63 observações de carros do modelo "SE" com transmissão automática.
+# - A contribuição qui-quadrado para essa célula é 0.190, que é relevante para testes estatísticos.
+# - A proporção de observações "SE" com transmissão automática em relação ao total de "SE" é de 0.808.
+# - A proporção de observações "SE" com transmissão automática em relação ao total de "AUTO" é de 0.492.
+# - A proporção de observações "SE" com transmissão automática em relação ao total geral da tabela é de 0.420.
 
 
 
