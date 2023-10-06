@@ -28,7 +28,7 @@ getwd()
 #   (utilizaremos o dataset carros-usados)
 
 
-install.packages("gmodels")
+# install.packages("gmodels")
 
 # Carregando pacotes
 library(dplyr)
@@ -40,9 +40,8 @@ library(gmodels)   # pacote de gráficos e funções estatísticas que oferece f
 
 # Carregando o dataset
 carros <- read_csv("carros-usados.csv")
-View(carros)
 head(carros)
-
+View(carros)
 
 
 ####### RESUMO GERAL #######
@@ -195,9 +194,11 @@ head(carros)
 
 # Teste do Qui-quadrado
 
-# - Simbolizado por X2 é  um teste de hipóteses usado para determinar se existe uma associação significativa entre duas variáveis
-#   categóricas. 
+# - Simbolizado por X2 é um teste de hipóteses usado para determinar se existe uma associação significativa entre duas variáveis
+#   categóricas. Ou seja, quando precisarmos realizar um teste de hipótese entre variáveis categorias, o Qui-quadrado é uma opção.
+
 # - É um teste não paramétrico, ou seja, não depende dos parâmetros populacionais como média e variância.
+
 # - O princípio básico deste método é comparar proporções, isto é, as possíveis divergências entre as frequências observadas e esperadas
 #   para um certo evento. Evidentemente, pode-se dizer que dois grupos se comportam de forma semelhante se as diferenças entre as
 #   frequências observadas e as esperadas em cada categoria forem muito pequenas, próximas a zero.
@@ -210,13 +211,13 @@ chisq.test(x = carros$modelo, y = carros$conserv)                 # calcula valo
 
 # Trabalhamos com 2 hipóteses:
 
-# -> Hipótese nula: As frequências observadas não são diferentes das frequências esperadas. 
-#                   Não existe diferença entre as frequências (contagens) dos grupos.
-#                   Portanto, não há associação entre os grupos
+#  -> Hipótese nula        : As frequências observadas não são diferentes das frequências esperadas. 
+#                            Não existe diferença entre as frequências (contagens) dos grupos.
+#                            Portanto, não há associação entre os grupos
 
-# -> Hipótese alternativa: As frequências observadas são diferentes das frequências esperadas, 
-#                          Existe diferença entre as frequências.
-#                          Portanto, há associação entre os grupos.
+#  -> Hipótese alternativa : As frequências observadas são diferentes das frequências esperadas, 
+#                            Existe diferença entre as frequências.
+#                            Portanto, há associação entre os grupos.
 
 
 # Neste caso, o valor do Chi = 0.15  
@@ -224,6 +225,31 @@ chisq.test(x = carros$modelo, y = carros$conserv)                 # calcula valo
 
 # Portanto, não há associação entre os grupos
 # O valor alto do p-value confirma esta conclusão.
+
+
+
+
+
+#### Após realizar a análise exploratória e entender melhor os dados podemos:
+
+#  -> aplicar testes estatísticos
+#  -> aplicar resumo
+#  -> criar gráficos
+#  -> documentar tudo que foi feito
+
+# Após compreender e entender melhor os dados estaremos prontos para o pré-processamento onde faremos:
+
+#  -> transformação
+#  -> limpeza dos dados
+#  -> preparação dos dados para a modelagem preditiva
+
+
+
+
+
+
+
+
 
 
 
