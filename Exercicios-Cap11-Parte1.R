@@ -18,42 +18,84 @@ library(caret)     # usado em tarefas de classificação e regressão para simpl
 
 ## Exercício 1 - Massa de dados aleatória
 
-# Criando a massa de dados (apesar de aleatória, y possui 
-# uma relação com os dados de x)
+# Criando a massa de dados (apesar de aleatória, y possui uma relação com os dados de x)
 x <- seq(0, 100)
 y <- 2 * x + 35
 
-# Imprimindo as variáveis
 x
 y
 
 # Gerando uma distribuição normal
 y1 <- y + rnorm(101, 0, 50)
 y1
+
+# Histograma
 hist(y1)
 
-# Crie um plot do relacionamento de x e y1
 
 
-# Crie um modelo de regressão para as duas variáveis x e y1
+# -> Crie um plot do relacionamento de x e y1 (criando um Scatter plot)
+
+plot(x, y1, type = 'p')
+
+# Usando ggplot
+dados <- data.frame(x = x, y1 = y1)
+
+ggplot(dados, aes(x = x, y = y1)) +
+  geom_point() +
+  labs(x = "Eixo X", y = "Eixo Y") +
+  ggtitle("Gráfico de Dispersão de x e y1")
 
 
-# Capture os coeficentes
+
+# -> Crie um modelo de regressão para as duas variáveis x e y1:
+
+modelo <- lm(data = dados, x ~ y1)
+modelo
+summary(modelo)
 
 
-# Fórmula de Regressão
+
+# -> Capture os coeficentes:
+
+coeficientes <- coef(modelo)
+
+a <- coeficientes[1]
+b <- coeficientes[2]
+
+# Capturar os coeficientes de um modelo de regressão linear é útil por várias razões:
+
+# -> Interpretação dos efeitos: Os coeficientes do modelo indicam como uma unidade de mudança na variável independente 
+#    (no caso, y1) está associada a uma mudança na variável dependente (x). No seu modelo, o coeficiente 0.2625 indica que,
+#    para cada unidade de aumento em y1, x aumenta em média 0.2625 unidades. O coeficiente de interceptação (14.0219542) 
+#    representa o valor estimado de x quando y1 é igual a zero.
+
+# -> Previsões: Você pode usar esses coeficientes para fazer previsões. Por exemplo, se você tiver um novo valor de y1, poderá
+#    usar o modelo e os coeficientes para prever o valor correspondente de x.
+
+
+
+# Fórmula de Regressão (utilizando dados dos coeficientes)
 y2 <- a + b*x
 
-# Visualize a linha de regressão
+# -> Visualize a linha de regressão: (antes tem que carregar a linha de código com o plot)
+
+plot(x, y1, type = 'p')
+
+lines(x, y2, lwd = 2)
 
 
 # Simulando outras possíveis linhas de regressão
+
 y3 <- (y2[51]-50*(b-1))+(b-1)*x
 y4 <- (y2[51]-50*(b+1))+(b+1)*x
 y5 <- (y2[51]-50*(b+2))+(b+2)*x
 lines(x,y3,lty=3)
 lines(x,y4,lty=3)
 lines(x,y5,lty=3)
+
+
+
 
 
 ## Exercício 2 - Pesquisa sobre idade e tempo de reação
