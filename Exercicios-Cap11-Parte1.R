@@ -101,6 +101,7 @@ lines(x,y5,lty=3)
 ## Exercício 2 - Pesquisa sobre idade e tempo de reação
 
 # Criando os dados
+
 Idade <- c(9,13,14,21,15,18,20,8,14,23,16,21,10,12,20,
            9,13,5,15,21)
 
@@ -108,16 +109,59 @@ Tempo <- c(17.87,13.75,12.72,6.98,11.01,10.48,10.19,19.11,
            12.72,0.45,10.67,1.59,14.91,14.14,9.40,16.23,
            12.74,20.64,12.34,6.44)
 
-# Crie um Gráfico de Dispersão (ScatterPlot)
+dados <- as.data.frame(Idade = Idade, Tempo = Tempo)
+
+# -> Crie um Gráfico de Dispersão (ScatterPlot):
+
+plot(Idade, Tempo, type = 'p')
 
 
-# Crie um modelo de regressão
+# -> Crie um modelo de regressão:
+
+modelo <- lm(Idade ~ Tempo)
+modelo
+summary(modelo)
 
 
-# Calcule a reta de regressão
+# -> Calcule a reta (linha) de regressão: 
+
+## Opção 1 (capturando coeficientes)
+
+# Capturando os coeficentes:
+
+coeficientes <- coef(modelo)
+coeficientes
+a <- coeficientes[1]
+b <- coeficientes[2]
+
+# Aplicando a Fórmula de Regressão (utilizando dados dos coeficientes)
+formula <- a + b*Idade
 
 
-# Crie o gráfico da reta
+## Opção 2 (aplicando a fórmula colocando os dados direto)
+
+formula2 <- 25.7485266 + -0.9299878 * Idade
+
+
+
+# -> Visualize a linha de regressão: 
+
+formula
+formula2
+
+
+
+# -> Crie o gráfico da reta: (antes tem que carregar a linha de código com o plot)
+
+plot(Idade, Tempo, type = 'p')
+lines(Idade, formula, lwd = 2)
+
+
+
+
+
+
+
 
 
 
