@@ -16,7 +16,7 @@ library(caret)     # usado em tarefas de classificação e regressão para simpl
 
 
 
-## Exercício 1 - Massa de dados aleatória
+##### Exercício 1 - Massa de dados aleatória
 
 # Criando a massa de dados (apesar de aleatória, y possui uma relação com os dados de x)
 x <- seq(0, 100)
@@ -98,7 +98,7 @@ lines(x,y5,lty=3)
 
 
 
-## Exercício 2 - Pesquisa sobre idade e tempo de reação
+##### Exercício 2 - Pesquisa sobre idade e tempo de reação
 
 # Criando os dados
 
@@ -109,7 +109,6 @@ Tempo <- c(17.87,13.75,12.72,6.98,11.01,10.48,10.19,19.11,
            12.72,0.45,10.67,1.59,14.91,14.14,9.40,16.23,
            12.74,20.64,12.34,6.44)
 
-dados <- as.data.frame(Idade = Idade, Tempo = Tempo)
 
 # -> Crie um Gráfico de Dispersão (ScatterPlot):
 
@@ -144,7 +143,7 @@ formula2 <- 25.7485266 + -0.9299878 * Idade
 
 
 
-# -> Visualize a linha de regressão: 
+## Visualizando a linha de regressão: 
 
 formula
 formula2
@@ -161,32 +160,55 @@ lines(Idade, formula, lwd = 2)
 
 
 
-
-
-
-
-# Exercício 3 - Relação entre altura e peso
+##### Exercício 3 - Relação entre altura e peso
 
 # Criando os dados
 alturas = c(176, 154, 138, 196, 132, 176, 181, 169, 150, 175)
 pesos = c(82, 49, 53, 112, 47, 69, 77, 71, 62, 78)
+
+dados <- data.frame(alturas = alturas, pesos = pesos)
+head(dados)
 
 plot(alturas, pesos, pch = 16, cex = 1.3, col = "blue", 
      main = "Altura x Peso", 
      ylab = "Peso Corporal (kg)", 
      xlab = "Altura (cm)")
 
-# Crie o modelo de regressão
+
+# -> Crie o modelo de regressão:
+modelo <- lm(data = dados, pesos ~ alturas)
 
 
-# Visualizando o modelo
+# -> Visualizando o modelo:
+modelo
+summary(modelo)
 
 
-# Gere a linha de regressão
+# -> Gere a linha de regressão (utilizando abline())
+coeficientes <- coef(modelo)
+coeficientes
+a <- coeficientes[1]
+b <- coeficientes[2]
+
+plot(alturas, pesos, pch = 16, cex = 1.3, col = "blue", 
+     main = "Altura x Peso", 
+     ylab = "Peso Corporal (kg)", 
+     xlab = "Altura (cm)")
+
+abline(a, b)
+
+# - abline() é uma função específica para traçar linhas de um modelo de regressão linear simples (com duas variáveis) em um gráfico,
+#   enquanto lines() é uma função geral para traçar linhas em um gráfico. Ambas podem ser usadas para traçar uma linha de regressão,
+#   mas abline() é mais conveniente quando você já tem um modelo de regressão linear.
 
 
-# Faça as previsões de pesos com base na nova lista de alturas
+
+
+# -> Faça as previsões de pesos com base na nova lista de alturas:
 alturas2 = data.frame(c(179, 152, 134, 197, 131, 178, 185, 162, 155, 172))
+
+previsao <- predict(modelo, newdata = alturas2, type = 'response')
+previsao
 
 
 # Plot
