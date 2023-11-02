@@ -218,7 +218,7 @@ plot(alturas, pesos, pch = 16, cex = 1.3,
      ylab = "Peso (kg)", 
      xlab = "Altura (cm)")
 
-# Construindo a linha de regressão
+# Construindo a linha de regressão (passando o modelo direto como parâemtro)
 abline(lm(pesos ~ alturas)) 
 
 # Obtendo o tamanho de uma das amostras de dados
