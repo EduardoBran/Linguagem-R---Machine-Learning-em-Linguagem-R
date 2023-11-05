@@ -83,7 +83,7 @@ teste <- dados[-indices, ]
 # Selecionar apenas as variáveis numéricas para o modelo
 variaveis_numericas <- treino[, sapply(treino, is.numeric)]
 
-# Remover as colunas G1, G2 e G3 das variáveis independentes
+# Remover as colunas G1 e G2 das variáveis independentes
 variaveis_independentes <- variaveis_numericas[, !(colnames(variaveis_numericas) %in% c("G1", "G2"))]
 
 # Criar o modelo de regressão linear múltipla
@@ -91,33 +91,48 @@ modelo_v1 <- lm(data = variaveis_independentes, G3 ~ .)
 
 summary(modelo_v1)
 
+# Multiple R-squared:  0.2117,	Adjusted R-squared:  0.178 
 
-# Versão 2 do Modelo - Regressão Linear Múltipla
+
+
+# Versão 2 do Modelo - Regressão Linear Múltipla (com seleção de variáveis)
 
 modelo_v2 <- lm(data = treino, G3 ~ Medu + failures + goout)
 
 summary(modelo_v2)
 
+# Multiple R-squared:  0.1831,	Adjusted R-squared:  0.1753 
 
-# Versão 3 do Modelo - Regressão Linear Múltipla
+
+
+# Versão 3 do Modelo - Regressão Linear Múltipla (com seleção de variáveis)
 
 modelo_v3 <- lm(data = treino, G3 ~ failures + Medu)
 
 summary(modelo_v3)
 
+# Multiple R-squared:  0.1667,	Adjusted R-squared:  0.1614 
 
-# Versão 4 do Modelo - Regressão Linear Múltipla
+
+
+# Versão 4 do Modelo - Regressão Linear Múltipla (com seleção de variáveis)
 
 modelo_v4 <- lm(data = treino, G3 ~ failures + goout)
 
-summary(modelo_v3)
+summary(modelo_v4)
+
+# Multiple R-squared:  0.152,	Adjusted R-squared:  0.1466 
 
 
-# Versão 4 do Modelo - Regressão Linear Simples
+
+# Versão 5 do Modelo - Regressão Linear Simples
 
 modelo_v5 <- lm(data = treino, G3 ~ failures)
 
 summary(modelo_v5)
+
+# Multiple R-squared:  0.1391,	Adjusted R-squared:  0.1364 
+
 
 
 # Interpretando
@@ -133,9 +148,21 @@ summary(modelo_v5)
 
 ## Previsões
 
-previsoes <- predict(modelo_v3, newdata = teste, type = 'response')
+previsoes <- predict(modelo_v2, newdata = teste, type = 'response')
 previsoes
 
+
+
+# Extrair os valores reais do conjunto de dados de teste
+Y_teste <- teste$G3
+
+# Calcular o Mean Squared Error (MSE) para previsoes
+mse_ridge <- mean((previsoes - Y_teste)^2)
+mse_ridge
+
+# Calcular o Mean Absolute Error (MAE) para previsoes
+mae_ridge <- mean(abs(previsoes - Y_teste))
+mae_ridge
 
 
 
@@ -178,31 +205,53 @@ modelo_ridge_final
 # Resumo do modelo Ridge
 summary(modelo_ridge_final)
 
+
 ## Previsões
 
 # Amostra aleatória de 20 linhas dos dados originais
 amostra <- variaveis_independentes[sample(nrow(variaveis_independentes), 318), ]
 amostra$G3 <- NULL
 
-previsoes <- predict(modelo_ridge_final, newx = as.matrix(amostra))
-previsoes <- as.vector(previsoes)
+previsoes_ridge <- predict(modelo_ridge_final, newx = as.matrix(amostra))
+previsoes_ridge <- as.vector(previsoes)
+
+# Calcular o Mean Squared Error (MSE) para o modelo Ridge
+mse_ridge <- mean((previsoes_ridge - Y)^2)
+mse_ridge
+
+# Calcular o Mean Absolute Error (MAE) para o modelo Ridge
+mae_ridge <- mean(abs(previsoes_ridge - Y))
+mae_ridge
 
 
-# adicionando as previsões a um novo dataframe editado
+# Adicionando as previsões a um novo dataframe editado
 dados_com_previsoes <- variaveis_independentes
-dados_com_previsoes$Previsoes_Ridge_G3 <- previsoes
+dados_com_previsoes$Previsoes_Ridge_G3 <- previsoes_ridge
 dados_com_previsoes$Previsoes_Ridge_G3 <- round(dados_com_previsoes$Previsoes_Ridge_G3, 2)
 
 head(dados_com_previsoes)
 
 
-## Comparação com o modelo_v3
+## Comparação com o modelo_v2
 
-# -> "modelo_v3": R-quadrado (R-squared) ≈ 0.1759, o que significa que cerca de 17.59% da variabilidade em G3 é
-#    explicada pelas variáveis independentes (failures e Medu) incluídas no modelo de Regressão Linear Múltipla.
+# -> "modelo_v2": R-quadrado (R-squared) ≈ 0.1831, o que significa que cerca de 18.31% da variabilidade em G3 é
+#    explicada pelas variáveis independentes (Medu, failures e goout) incluídas no modelo de Regressão Linear Múltipla.
+#    Modelo v2 possui um MSE de 23.0398 e MAE de 3.5470
 
-# -> "modelo_ridge_final": %Dev (Desvio Deviance Percentual) ≈ 20.08, o que indica que aproximadamente 20.08% da
+# -> "modelo_ridge_final": %Dev (Desvio Deviance Percentual) ≈ 20.04, o que indica que aproximadamente 20.04% da
 #    deviance (variabilidade) na variável G3 é explicada pelo modelo Ridge com a seleção de variáveis independentes.
+#    Modelo Bridge Final possui um MSE de 22.5582 e um MAE de 3.5941
+
+# - Embora as diferenças entre os modelos sejam relativamente pequenas, o modelo modelo_ridge_final tem ligeiramente melhores
+#   métricas de erro, indicando que ele é um pouco melhor em fazer previsões em comparação com modelo_v2.
+
+
+
+
+
+
+
+
 
 
 
