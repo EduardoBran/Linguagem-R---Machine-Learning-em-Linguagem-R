@@ -23,6 +23,11 @@ library(ggthemes)
 # -> Definição do Problema: Prever as notas dos alunos com base em diversas métricas
 #                           Vamos prever a nota final (grade) dos alunos
 
+# - Este é um problema de REGRESSÃO pois a definição de problema é buscar um valor numérico (notas), caso o problema
+#   buscar um valor categórico (ex: aluno aprovado 'SIM' ou 'NAO') usaríamos CLASSIFICAÇÃO
+
+
+
 # Carregando massa de dados
 dados_matematica <- as.data.frame(read.table("student-mat.csv",sep=";",header=TRUE))
 head(dados_matematica)
@@ -37,7 +42,7 @@ head(dados)
 View(dados)
 
 
-# Arquivo original do professor (será usado este)
+# Arquivo original do professor (será usado esta base de dados)
 dados <- as.data.frame(read.csv2('estudantes.csv'))
 head(dados)
 View(dados)
@@ -80,14 +85,15 @@ teste <- dados[-indices, ]
 
 # Versão 1 do Modelo - Regressão Linear Múltipla
 
-# Selecionar apenas as variáveis numéricas para o modelo
+# Selecionar apenas as variáveis numéricas para o modelo    (NÃO FAZER ISSO!!!!!!!!!)
 variaveis_numericas <- treino[, sapply(treino, is.numeric)]
 
 # Remover as colunas G1 e G2 das variáveis independentes
 variaveis_independentes <- variaveis_numericas[, !(colnames(variaveis_numericas) %in% c("G1", "G2"))]
 
-# Criar o modelo de regressão linear múltipla
+# Criar o modelo de regressão linear múltipla (CORRETO É UTILIZAR TODAS AS VARIÁVEIS, INCLUSIVE AS CATEGÓRICAS)
 modelo_v1 <- lm(data = variaveis_independentes, G3 ~ .)
+modelo_v1 <- lm(data = treino, G3 ~ .)
 
 summary(modelo_v1)
 
@@ -97,7 +103,7 @@ summary(modelo_v1)
 
 # Versão 2 do Modelo - Regressão Linear Múltipla (com seleção de variáveis)
 
-modelo_v2 <- lm(data = treino, G3 ~ Medu + failures + goout)
+modelo_v2 <- lm(data = variaveis_independentes, G3 ~ Medu + failures + goout)
 
 summary(modelo_v2)
 
