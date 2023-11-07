@@ -242,12 +242,17 @@ SST <- sum((mean(dados$G3) - resultados$Real)^2)
 R2 <- 1 - (SSE/SST)
 R2
 
-# O R-quadrado é uma medida que indica a proporção da variabilidade na variável dependente (nota final, G3) que é explicada pelo modelo.
-# Nesse caso, o R-quadrado foi calculado como 0.7779023. Este valor está na faixa de 0 a 1, o que é apropriado para o R-quadrado. Significa que aproximadamente 77.79% da variabilidade nas notas é explicada pelo modelo.
-# Um valor de R-quadrado próximo a 1 indica que o modelo é capaz de explicar a maior parte da variação nas notas, enquanto um valor próximo a 0 indica que o modelo não explica bem as variações.
+# - O R-quadrado é uma medida que indica a proporção da variabilidade na variável dependente (nota final, G3) que é explicada pelo
+#   modelo.
+# - Nesse caso, o R-quadrado foi calculado como 0.7779023. Este valor está na faixa de 0 a 1, o que é apropriado para o R-quadrado.
+# - Significa que aproximadamente 77.79% da variabilidade nas notas é explicada pelo modelo.
+# - Um valor de R-quadrado próximo a 1 indica que o modelo é capaz de explicar a maior parte da variação nas notas, enquanto um valor 
+#   próximo a 0 indica que o modelo não explica bem as variações.
 
-
-# Em resumo, o seu modelo tem um RMSE de aproximadamente 2.1003, o que significa que, em média, as previsões estão a cerca de 2.1003 unidades de distância das notas reais. Além disso, o R-quadrado de aproximadamente 0.7779 sugere que o modelo explica bem a variabilidade nas notas dos estudantes, explicando cerca de 77.79% da variabilidade total. Essas métricas indicam que o modelo tem um desempenho razoável na previsão das notas dos estudantes, mas sempre é possível buscar melhorias, se necessário.
+# Em resumo, o seu modelo tem um RMSE de aproximadamente 2.1003, o que significa que, em média, as previsões estão a cerca de 
+# 2.1003 unidades de distância das notas reais. Além disso, o R-quadrado de aproximadamente 0.7779 sugere que o modelo explica bem
+# a variabilidade nas notas dos estudantes, explicando cerca de 77.79% da variabilidade total. Essas métricas indicam que o modelo 
+# tem um desempenho razoável na previsão das notas dos estudantes, mas sempre é possível buscar melhorias, se necessário.
 
 
 
