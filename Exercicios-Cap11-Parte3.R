@@ -23,7 +23,7 @@ library(neuralnet) # pacote para Redes Neurais
 library(MASS)      # fornece funções e conjuntos de dados para realizar análises estatísticas avançadas e modelagem estatística.
                    # contem o conjunto de dados Boston
 
-# -> Contexto: Analisando dados das casas de Boston, nos EUA e fazendo previsoes.
+# -> Contexto           : Analisando dados das casas de Boston, nos EUA e fazendo previsoes.
 
 # -> Problema de negócio: Seu modelo deve prever a MEDV (Valor da Mediana de ocupação das casas).
 #                         Utilize um modelo de rede neural!
@@ -226,7 +226,8 @@ ggplot(res_v3, aes(residuos)) +
 
 
 
-# Previsões
+## Previsões
+
 previsoes_v3 <- predict(modelo_v3, teste_do)
 
 # Agora vamos comparar as previsões do modelo com os valores reais.

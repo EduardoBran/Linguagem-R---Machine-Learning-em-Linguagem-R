@@ -263,6 +263,8 @@ R2
 
 
 
+
+
 ## Aqui está uma explicação de cada variável no conjunto de dados "dados":
 
 # school: O tipo de escola frequentado pelo aluno ("GP" - Gabriel Pereira ou "MS" - Mousinho da Silveira).
