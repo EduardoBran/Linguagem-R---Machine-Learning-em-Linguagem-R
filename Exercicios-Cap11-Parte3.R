@@ -37,6 +37,7 @@ dados <- Boston
 head(dados)
 View(dados)
 
+View(Boston)
 
 ## Analise Exploratória
 

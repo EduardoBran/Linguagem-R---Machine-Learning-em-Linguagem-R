@@ -12,6 +12,9 @@ library(dplyr)     # manipulação de dados
 library(corrplot)  # criar gráfico de mapa de correlação
 library(ggplot2)   # criar outros gráficos (especificamente de dispersão)
 library(caret)     # usado em tarefas de classificação e regressão para simplificar o processo de treinamento de modelos
+library(caTools)   # contém a função sample.split() que cria uma amostra que irá fazer a divisão entre dados de treinos e testes
+# de maneira aleatória
+library(caret)
 
 # install.packages("kernlab")
 library(kernlab)
@@ -164,6 +167,19 @@ prop.table(table(vetor_rbf))        # FALSE 0.06925    TRUE 0.93075
 # Essas variáveis parecem representar características numéricas extraídas de imagens de letras. Cada observação (linha) é uma
 # letra, e as características descrevem diferentes aspectos da forma e orientação da letra. Esses tipos de dados podem ser
 # usados em tarefas de classificação de caracteres ou análise de reconhecimento de letras.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
