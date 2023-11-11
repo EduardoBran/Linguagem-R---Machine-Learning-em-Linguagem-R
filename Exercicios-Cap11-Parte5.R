@@ -283,6 +283,157 @@ modelo_ksvm_van_nor # Training error : 0.001317
 
 
 
+## FAZENDO AS PREVISÕES E ESCOLHENDO MELHOR MODELO
+
+# Previsões com modelo de Regressão Linear
+
+modelo_v2_original_predictions <- predict(modelo_v2_original, teste_original)
+head(modelo_v2_original_predictions)
+modelo_v2_norma_predictions <- predict(modelo_v2_norma, teste_norma)
+head(modelo_v2_original_predictions)
+
+
+
+## Criando um dataframe para comparar os dados reais com os da previsão
+
+resultados_v2_original <- data.frame(Valor_Real = teste_original$PREMIO_NET_Corrigido,
+                                     Valor_Prev = modelo_v2_original_predictions)
+resultados_v2_original$Valor_Prev <- floor(resultados_v2_original$Valor_Prev)
+resultados_v2_norma <- data.frame(Valor_Real = teste_norma$PREMIO_NET_Corrigido,
+                                  Valor_Prev = modelo_v2_norma_predictions)
+resultados_v2_norma$Valor_Prev <- floor(resultados_v2_norma$Valor_Prev)
+
+head(resultados_v2_original)
+head(resultados_v2_norma)
+
+
+
+## Criando um vetor de TRUE/FALSE indicando previsões CORRETAS/INCORRETAS
+vetor_modelo_v2_ori <- resultados_v2_original == teste_original$PREMIO_NET_Corrigido
+vetor_modelo_v2_nor <- resultados_v2_norma == teste_norma$PREMIO_NET_Corrigido
+
+table(vetor_modelo_v2_ori)                    # FALSE 52           TRUE 208
+table(vetor_modelo_v2_nor)                    # FALSE 44           TRUE 216
+prop.table(table(vetor_modelo_v2_ori))        # FALSE 0.2          TRUE 0.8
+prop.table(table(vetor_modelo_v2_nor))        # FALSE 0.1692308    TRUE 0.8307692  
+
+
+
+
+
+# Previsões com modelo de Rede Neural
+
+modelo_rn_original_predictions <- predict(modelo_rede_v1_original, teste_original)
+head(modelo_rn_original_predictions)
+modelo_v2_norma_predictions <- predict(modelo_v2_norma, teste_norma)
+head(modelo_v2_original_predictions)
+
+
+
+## Criando um dataframe para comparar os dados reais com os da previsão
+
+resultados_rn_original <- data.frame(Valor_Real = teste_original$PREMIO_NET_Corrigido,
+                                     Valor_Prev = modelo_v2_original_predictions)
+resultados_v2_original$Valor_Prev <- floor(resultados_v2_original$Valor_Prev)
+resultados_v2_norma <- data.frame(Valor_Real = teste_norma$PREMIO_NET_Corrigido,
+                                  Valor_Prev = modelo_v2_norma_predictions)
+resultados_v2_norma$Valor_Prev <- floor(resultados_v2_norma$Valor_Prev)
+
+head(resultados_v2_original)
+head(resultados_v2_norma)
+
+
+
+## Criando um vetor de TRUE/FALSE indicando previsões CORRETAS/INCORRETAS
+vetor_modelo_v2_ori <- resultados_v2_original == teste_original$PREMIO_NET_Corrigido
+vetor_modelo_v2_nor <- resultados_v2_norma == teste_norma$PREMIO_NET_Corrigido
+
+table(vetor_modelo_v2_ori)                    # FALSE 52           TRUE 208
+table(vetor_modelo_v2_nor)                    # FALSE 44           TRUE 216
+prop.table(table(vetor_modelo_v2_ori))        # FALSE 0.2          TRUE 0.8
+prop.table(table(vetor_modelo_v2_nor))        # FALSE 0.1692308    TRUE 0.8307692  
+
+
+
+
+
+
+
+
+
+
+
+# Previsões com modelo de Kernel
+
+
+
+
+
+
+
+
+
+
+
+
+
+# TIPO_EMISSAO  - TIPO FACTOR
+# PREMIO_SEGURO  - NUM
+# PREMIO_SEGURO_LIQUIDO - TIPO NUM
+# PREMIO_Resseguro_Bruto - TIPO NUM
+# COMISSAO_Resseguro - TIPO NUM
+# LMG_Ultimo_Unique - TIPO NUM
+# PREMIO_NET_Corrigido - TIPO NUM
+# COMISSAO_de_Resseguro_Corrigida - TIPO NUM
+# Check_Premio_de_Resseguro - TIPO NUM
+
+
+# - Você tem uma base de dados de uma carteira de seguros de propriedades (Property) de uma seguradora. Aqui está uma explicação das
+#   principais variáveis presentes na base de dados:
+
+
+# CONTRATO                       : Número de contrato ou identificação única de cada apólice de seguro.
+# TIPO EMISSÃO                   : Indica o tipo de emissão da apólice, possivelmente "LIDERANÇA" referindo-se à apólice principal.
+# APÓLICE                        : Número da apólice de seguro.
+# Endosso                        : Número de endosso, que representa alterações ou adições às condições da apólice.
+# RAMO                           : Código que identifica o ramo de seguro, como Property (propriedade).
+# DATA EMISSÃO                   : Data em que a apólice foi emitida.
+# DATA INÍCIO DA VIGÊNCIA        : Data de início da vigência da apólice.
+# DATA TÉRMINO DA VIGÊNCIA       : Data de término da vigência da apólice.
+# MOEDA                          : Moeda em que a apólice está denominada, possivelmente BRL (Real brasileiro).
+# LMG                            : Limite Máximo de Garantia, que é o valor máximo que a seguradora pagará em caso de sinistro.
+# LMG Facility                   : Limite Máximo de Garantia da apólice.
+# PRÊMIO SEGURO                  : Prêmio de seguro a ser pago pelo segurado.
+# COMISSÃO %                     : Porcentagem da comissão de seguro.
+# COMISSÃO SEGURO                : Valor da comissão de seguro.
+# PRÊMIO SEGURO LIQUIDO          : Valor líquido do prêmio de seguro após dedução da comissão.
+# % RESSEGURO                    : Porcentagem de resseguro.
+# PRÊMIO Resseguro Bruto         : Prêmio de resseguro bruto.
+# % COMISSÃO RESSEGURO           : Porcentagem da comissão de resseguro.
+# COMISSÃO Resseguro             : Valor da comissão de resseguro.
+# Check Quantidade               : Quantidade de verificações.
+# Chave c Endosso                : Chave que pode estar relacionada ao número do endosso.
+# Check Quantidade de Chaves     : Quantidade de chaves.
+# Apolice_Ultima                 : Informação sobre a apólice mais recente.
+# Chave_Apolice_Ultima           : Chave relacionada à apólice mais recente.
+# LMG_Facility                   : Limite Máximo de Garantia da apólice.
+# LMG_Corrigido                  : Limite Máximo de Garantia corrigido.
+# LMG_Ultimo_Dup                 : Limite Máximo de Garantia do último dup.
+# LMG_Ultimo_Unique              : Limite Máximo de Garantia do último único.
+# PRÊMIO NET_Corrigido           : Prêmio líquido corrigido.
+# COMISSÃO de Resseguro_Corrigida: Comissão de resseguro corrigida.
+# Check Comissao de Resseguro    : Verificação da comissão de resseguro.
+# Check Premio de Resseguro      : Verificação do prêmio de resseguro.
+# Check Premio de Resseguro Bruto: Verificação do prêmio de resseguro bruto.
+# Ano de Contrato                : Ano do contrato.
+# APÓLICE&INICIODEVIG            : Combinação da apólice e data de início de vigência.
+# UWY                            : Possivelmente, um ano de subscrição ou data relevante.
+# LMG Facility Unique            : Limite Máximo de Garantia da apólice único
+# Year&Month                     : Ano e mês da transação.
+
+
+
+
 
 
 
